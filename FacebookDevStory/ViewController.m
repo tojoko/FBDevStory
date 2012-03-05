@@ -10,6 +10,8 @@
 
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
 
+static float screenWidth, screenHeight;
+
 // Uniform index.
 enum
 {
@@ -140,6 +142,9 @@ GLfloat gCubeVertexData[216] =
 
     GLKTextureInfo* sadCreature;
     GLKTextureInfo* happyCreature;
+
+    GLKTextureInfo* handle;
+    GLKTextureInfo* crank;
     
     double time;
 
@@ -241,7 +246,7 @@ GLfloat gCubeVertexData[216] =
     // self.effect.material.ambientColor = GLKVector4Make(1.0f, 0.4f, 0.4f, 1.0f);
     // self.effect.constantColor = GLKVector4Make(1.0f, 0.4f, 0.4f, 1.0f);
     
-    glEnable(GL_DEPTH_TEST);
+    glDisable(GL_DEPTH_TEST);
     #if 0
     glGenVertexArraysOES(1, &_vertexArray);
     glBindVertexArrayOES(_vertexArray);
@@ -267,6 +272,8 @@ GLfloat gCubeVertexData[216] =
     sadCreature = [self loadTex:@"sad"];
     happyCreature = [self loadTex:@"happy"];
 
+    handle = [self loadTex:@"handle"];
+    crank = [self loadTex:@"crank"];
 
 }
 
@@ -292,7 +299,20 @@ GLfloat gCubeVertexData[216] =
 {
 //    float aspect = fabsf(self.view.bounds.size.width / self.view.bounds.size.height);
 //    GLKMatrix4 projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(65.0f), aspect, 0.1f, 100.0f);
-    GLKMatrix4 projectionMatrix = GLKMatrix4MakeOrtho(0, 768, 1024, 0, -1, 1);
+    
+    
+    
+    
+    
+    screenWidth  = self.view.frame.size.width;
+    screenHeight  = self.view.frame.size.height;
+    if( [UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationLandscapeLeft ||
+         [UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationLandscapeRight)
+    {
+        screenWidth  = self.view.frame.size.height;
+        screenHeight  = self.view.frame.size.width;
+    }
+    GLKMatrix4 projectionMatrix = GLKMatrix4MakeOrtho(0, screenWidth, screenHeight, 0, -1, 1);
     
     self.effect.transform.projectionMatrix = projectionMatrix;
     
@@ -319,19 +339,40 @@ GLfloat gCubeVertexData[216] =
     time += self.timeSinceLastUpdate;
 }
 
+-(void)rotateAroundX:(float)x Y:(float)y Rot:(float)rot
+{
+    GLKMatrix4 trns = GLKMatrix4MakeTranslation(x, y, 0);
+    GLKMatrix4 mtx = GLKMatrix4Rotate(trns, rot, 0.0f, 0.0f, 1.0f);
+    mtx = GLKMatrix4Multiply(mtx, GLKMatrix4Invert(trns, NULL) );
+    self.effect.transform.modelviewMatrix = mtx;
+    [self.effect prepareToDraw];
+}
+
 -(void)drawHappyCreature
 {
     [self.effect prepareToDraw];
-    tex(happyCreature, 768*.2f, 1024*.9f, .15f+sin(time*4)*.01f, .15f+cos(time*4)*.01f);
+    tex(happyCreature, screenWidth*.2f, screenHeight*.7f, .15f+sin(time*4)*.01f, .15f+cos(time*4)*.01f);
 }
 
 -(void)drawSadCreature
 {
-    float x =768*.2f;
-    float y = 1024*.9f;
+    float x =screenWidth*.2f;
+    float y = screenHeight*.7f;
 
     [self.effect prepareToDraw];
     tex(sadCreature, x, y, .15f+sin(time)*.01f, .15f+cos(time)*.001f);
+}
+
+-(void)drawCrank:(double)rot
+{
+    float x =screenWidth*.6f;
+    float y = screenHeight*.7f;
+
+    [self.effect prepareToDraw];
+    tex(crank, x, y, 1, 1);
+    [self rotateAroundX:x Y:(y-handle.height*.5f) Rot:time];
+    tex(handle, x-handle.width*.3f, y, 1, 1);
+    [self rotateAroundX:0 Y:0 Rot:0];
 }
 
 
@@ -351,6 +392,8 @@ GLfloat gCubeVertexData[216] =
 
     
     [self drawSadCreature];
+    
+    [self drawCrank:time];
 //    [self drawHappyCreature];
         
 

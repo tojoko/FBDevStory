@@ -30,6 +30,8 @@
 		BFB4060415051B09008E58D8 /* happy.png in Resources */ = {isa = PBXBuildFile; fileRef = BFB405FF15051B09008E58D8 /* happy.png */; };
 		BFB4060515051B09008E58D8 /* red.png in Resources */ = {isa = PBXBuildFile; fileRef = BFB4060015051B09008E58D8 /* red.png */; };
 		BFB4060615051B09008E58D8 /* sad.png in Resources */ = {isa = PBXBuildFile; fileRef = BFB4060115051B09008E58D8 /* sad.png */; };
+		BFB4060D15053A8D008E58D8 /* crank.png in Resources */ = {isa = PBXBuildFile; fileRef = BFB4060B15053A8D008E58D8 /* crank.png */; };
+		BFB4060E15053A8D008E58D8 /* handle.png in Resources */ = {isa = PBXBuildFile; fileRef = BFB4060C15053A8D008E58D8 /* handle.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +88,8 @@
 		BFB405FF15051B09008E58D8 /* happy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = happy.png; path = img/happy.png; sourceTree = "<group>"; };
 		BFB4060015051B09008E58D8 /* red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = red.png; path = img/red.png; sourceTree = "<group>"; };
 		BFB4060115051B09008E58D8 /* sad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sad.png; path = img/sad.png; sourceTree = "<group>"; };
+		BFB4060B15053A8D008E58D8 /* crank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = crank.png; path = img/crank.png; sourceTree = "<group>"; };
+		BFB4060C15053A8D008E58D8 /* handle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = handle.png; path = img/handle.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -220,6 +224,8 @@
 			isa = PBXGroup;
 			children = (
 				BFB405FD15051B09008E58D8 /* blue.png */,
+				BFB4060B15053A8D008E58D8 /* crank.png */,
+				BFB4060C15053A8D008E58D8 /* handle.png */,
 				BFB405FE15051B09008E58D8 /* green.png */,
 				BFB405FF15051B09008E58D8 /* happy.png */,
 				BFB4060015051B09008E58D8 /* red.png */,
@@ -307,6 +313,8 @@
 				BFB4060415051B09008E58D8 /* happy.png in Resources */,
 				BFB4060515051B09008E58D8 /* red.png in Resources */,
 				BFB4060615051B09008E58D8 /* sad.png in Resources */,
+				BFB4060D15053A8D008E58D8 /* crank.png in Resources */,
+				BFB4060E15053A8D008E58D8 /* handle.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
