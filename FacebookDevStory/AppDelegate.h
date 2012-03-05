@@ -19,6 +19,7 @@
     Facebook *facebook;
     id whoamiRequest;
     int64_t fbid;
+    UIButton *requestDialogButton;
 }
 
 @property (strong, nonatomic) UIWindow *window;

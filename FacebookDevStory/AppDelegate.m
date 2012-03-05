@@ -48,15 +48,15 @@
     [self.window makeKeyAndVisible];
 
     // Add the requests dialog button
-    UIButton *requestDialogButton = [UIButton 
-                                     buttonWithType:UIButtonTypeRoundedRect];
+    requestDialogButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     requestDialogButton.frame = CGRectMake(40, 150, 200, 40);
-    [requestDialogButton setTitle:@"Send Request" forState:UIControlStateNormal];
+    [requestDialogButton setTitle:@"Send Gift" forState:UIControlStateNormal];
     [requestDialogButton addTarget:self 
                             action:@selector(requestDialogButtonClicked)
                   forControlEvents:UIControlEventTouchUpInside];
     [self.viewController.view addSubview:requestDialogButton];
-
+    [requestDialogButton setHidden:YES];
+    
     // Add the feed dialog button
     UIButton *feedDialogButton = [UIButton 
                                   buttonWithType:UIButtonTypeRoundedRect];
@@ -192,6 +192,7 @@
 // FBDialogDelegate
 - (void)dialogDidComplete:(FBDialog *)dialog {
     NSLog(@"dialog completed successfully");
+    [self setItems: [self itemType] value:[self numItems: [self itemType]] - 1];    
 }
 
 // Method that gets called when the feed dialog button is pressed
@@ -280,6 +281,11 @@
 
     [defaults setObject:[NSNumber numberWithInteger:value] forKey:item];
 
+    if (itemType == [self itemType] && value <= 0)
+    {
+        [requestDialogButton setHidden:YES];        
+    }
+
     [defaults synchronize];
     
 }
@@ -295,6 +301,10 @@
     }
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSNumber* num = [defaults objectForKey:item];
+    if (itemType == [self itemType] && [num intValue] > 0)
+    {
+        [requestDialogButton setHidden:NO];        
+    }
     return [num intValue];
 }
 
