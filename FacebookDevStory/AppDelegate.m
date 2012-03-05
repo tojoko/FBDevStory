@@ -238,19 +238,9 @@
                 NSString *recipientID = [[requestObject objectForKey:@"to"] objectForKey:@"id"]; 
                 NSLog(@"request id:%@ sender:%@ recipient:%@", requestID, senderID, recipientID);
                 int itemType = [recipientID longLongValue]%3;
-                switch(itemType)
-                {
-                    case 0:
-                        //return redCube;
-                        break;
-                    case 1:
-                        //return greenCube;
-                        break;
-                    case 2:
-                        //return blueCube;
-                        break;
-                }
+                [self setItems: itemType value:[self numItems: itemType] + 1];
                 
+                // Delete request
                 NSMutableDictionary *params = [NSMutableDictionary dictionary];
                 [facebook requestWithGraphPath:requestID andParams:params andHttpMethod:@"DELETE" andDelegate:self];
             }
