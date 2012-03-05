@@ -131,7 +131,6 @@ GLfloat gCubeVertexData[216] =
     
     GLKMatrix4 _modelViewProjectionMatrix;
     GLKMatrix3 _normalMatrix;
-    float _rotation;
     
     GLuint _vertexArray;
     GLuint _vertexBuffer;
@@ -147,6 +146,7 @@ GLfloat gCubeVertexData[216] =
     GLKTextureInfo* crank;
     
     double time;
+    double rotation;
 
 }
 @property (strong, nonatomic) EAGLContext *context;
@@ -264,7 +264,8 @@ GLfloat gCubeVertexData[216] =
 #endif
     
     time = 0;
-
+    rotation = 0;
+    
     redCube = [self loadTex:@"red"];
     greenCube = [self loadTex:@"green"];
     blueCube = [self loadTex:@"blue"];
@@ -370,7 +371,7 @@ GLfloat gCubeVertexData[216] =
 
     [self.effect prepareToDraw];
     tex(crank, x, y, 1, 1);
-    [self rotateAroundX:x Y:(y-handle.height*.5f) Rot:time];
+    [self rotateAroundX:x Y:(y-handle.height*.5f) Rot:rot];
     tex(handle, x-handle.width*.3f, y, 1, 1);
     [self rotateAroundX:0 Y:0 Rot:0];
 }
@@ -393,7 +394,7 @@ GLfloat gCubeVertexData[216] =
     
     [self drawSadCreature];
     
-    [self drawCrank:time];
+    [self drawCrank:rotation];
 //    [self drawHappyCreature];
         
 
@@ -561,6 +562,21 @@ GLfloat gCubeVertexData[216] =
     }
     
     return YES;
+}
+
+-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+//    UITouch* touch = [touches anyObject];
+//    
+//    CGPoint loc = [touch locationInView:self.view];
+//    CGPoint prevloc = [touch previousLocationInView:self.view];
+//
+//    float dx = loc.x - prevloc.x;
+//    float dy = loc.y - prevloc.y;
+    
+//    rotation += sqrtf(dx*dx + dy*dy)*.01f;
+    rotation += self.timeSinceLastUpdate;
+    
 }
 
 @end
