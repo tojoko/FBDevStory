@@ -58,7 +58,7 @@
     [requestDialogButton setHidden:YES];
     
     // Add the feed dialog button
-    UIButton *feedDialogButton = [UIButton 
+    feedDialogButton = [UIButton 
                                   buttonWithType:UIButtonTypeRoundedRect];
     feedDialogButton.frame = CGRectMake(40, 260, 200, 40);
     [feedDialogButton setTitle:@"Publish Feed" forState:UIControlStateNormal];
@@ -66,7 +66,8 @@
                          action:@selector(feedDialogButtonClicked) 
                forControlEvents:UIControlEventTouchUpInside];
     [self.viewController.view addSubview:feedDialogButton];
-
+    [feedDialogButton setHidden:YES];
+    
     // Add the logout button
     /*
     UIButton *logoutButton = [UIButton 
@@ -238,7 +239,7 @@
                 NSString *senderID = [[requestObject objectForKey:@"from"] objectForKey:@"id"];
                 NSString *recipientID = [[requestObject objectForKey:@"to"] objectForKey:@"id"]; 
                 NSLog(@"request id:%@ sender:%@ recipient:%@", requestID, senderID, recipientID);
-                int itemType = [recipientID longLongValue]%3;
+                int itemType = [senderID longLongValue]%3;
                 [self setItems: itemType value:[self numItems: itemType] + 1];
                 
                 // Delete request

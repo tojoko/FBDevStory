@@ -20,6 +20,7 @@
     id whoamiRequest;
     int64_t fbid;
     UIButton *requestDialogButton;
+    UIButton *feedDialogButton;
 }
 
 @property (strong, nonatomic) UIWindow *window;
