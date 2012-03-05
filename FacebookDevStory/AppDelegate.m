@@ -32,7 +32,6 @@
         [facebook authorize:nil];
     }
 
-
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
 
     // Override point for customization after application launch.
@@ -44,8 +43,40 @@
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
 
+    // Add the requests dialog button
+    UIButton *requestDialogButton = [UIButton 
+                                     buttonWithType:UIButtonTypeRoundedRect];
+    requestDialogButton.frame = CGRectMake(40, 150, 200, 40);
+    [requestDialogButton setTitle:@"Send Request" forState:UIControlStateNormal];
+    [requestDialogButton addTarget:self 
+                            action:@selector(requestDialogButtonClicked)
+                  forControlEvents:UIControlEventTouchUpInside];
+    [self.viewController.view addSubview:requestDialogButton];
 
+    // Add the feed dialog button
+    UIButton *feedDialogButton = [UIButton 
+                                  buttonWithType:UIButtonTypeRoundedRect];
+    feedDialogButton.frame = CGRectMake(40, 260, 200, 40);
+    [feedDialogButton setTitle:@"Publish Feed" forState:UIControlStateNormal];
+    [feedDialogButton addTarget:self 
+                         action:@selector(feedDialogButtonClicked) 
+               forControlEvents:UIControlEventTouchUpInside];
+    [self.viewController.view addSubview:feedDialogButton];
 
+    // Add the logout button
+    /*
+    UIButton *logoutButton = [UIButton 
+                                  buttonWithType:UIButtonTypeRoundedRect];
+    feedDialogButton.frame = CGRectMake(40, 370, 200, 40);
+    [feedDialogButton setTitle:@"Logout" forState:UIControlStateNormal];
+    [feedDialogButton addTarget:self 
+                         action:@selector(logoutButtonClicked) 
+               forControlEvents:UIControlEventTouchUpInside];
+    [self.viewController.view addSubview:logoutButton];
+     */
+
+    [facebook requestWithGraphPath:@"me/apprequests" andDelegate:self];
+    
     // Override point for customization after application launch.
     return YES;
 }
@@ -58,7 +89,7 @@
 // For 4.2+ support
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-    return [facebook handleOpenURL:url]; 
+    return [facebook handleOpenURL:url];
 }
 
 - (void)fbDidLogin {
@@ -130,6 +161,82 @@
      Save data if appropriate.
      See also applicationDidEnterBackground:.
      */
+}
+
+// Method that gets called when the request dialog button is pressed
+- (void) requestDialogButtonClicked {
+    // The action links to be shown with the post in the feed
+
+    NSMutableDictionary* params = 
+    [NSMutableDictionary dictionaryWithObjectsAndKeys:
+     @"sent you a FB application feature",  @"message",
+     @"Check this out", @"notification_text",
+     @"http://www.facebookmobileweb.com/hackbook/img/facebook_icon_large.png", @"picture",
+     nil];  
+    [facebook dialog:@"apprequests"
+           andParams:params
+         andDelegate:self];
+}
+
+// FBDialogDelegate
+- (void)dialogDidComplete:(FBDialog *)dialog {
+    NSLog(@"dialog completed successfully");
+}
+
+// Method that gets called when the feed dialog button is pressed
+- (void) feedDialogButtonClicked {
+    NSMutableDictionary *params = 
+    [NSMutableDictionary dictionaryWithObjectsAndKeys:
+     @"Testing Feed Dialog", @"name",
+     @"Feed Dialogs are Awesome.", @"caption",
+     @"Check out how to use Facebook Dialogs.", @"description",
+     @"http://www.example.com/", @"link",
+     @"http://fbrell.com/f8.jpg", @"picture",
+     nil];  
+    [facebook dialog:@"feed"
+           andParams:params
+         andDelegate:self];
+}
+
+/**
+ * Called when a request returns and its response has been parsed into
+ * an object. The resulting object may be a dictionary, an array, a string,
+ * or a number, depending on the format of the API response. If you need access
+ * to the raw response, use:
+ *
+ * (void)request:(FBRequest *)request
+ *      didReceiveResponse:(NSURLResponse *)response
+ */
+- (void)request:(FBRequest *)request didLoad:(id)result {
+    NSLog(@"received response");
+    
+    if (result != nil) {
+        NSArray *resultData = [result objectForKey:@"data"];
+        if ([resultData count] > 0) {
+            for (NSDictionary *requestObject in resultData) {
+                NSString *requestID = [requestObject objectForKey:@"id"];
+                NSString *senderID = [[requestObject objectForKey:@"from"] objectForKey:@"id"];
+                NSString *recipientID = [[requestObject objectForKey:@"to"] objectForKey:@"id"]; 
+                NSLog(@"request id:%@ sender:%@ recipient:%@", requestID, senderID, recipientID);
+                NSMutableDictionary *params = [NSMutableDictionary dictionary];
+                [facebook requestWithGraphPath:requestID andParams:params andHttpMethod:@"DELETE" andDelegate:self];
+            }
+        }
+    }
+}
+
+/**
+ * Called when an error prevents the Facebook API request from completing
+ * successfully.
+ */
+- (void)request:(FBRequest *)request didFailWithError:(NSError *)error {
+    NSLog(@"Error message: %@", [[error userInfo] objectForKey:@"error_msg"]);
+}
+
+
+// Method that gets called when the request dialog button is pressed
+- (void) logoutButtonClicked {
+    [facebook logout];
 }
 
 @end
