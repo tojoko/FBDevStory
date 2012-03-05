@@ -29,4 +29,8 @@
 
 -(int)itemType;
 
+-(void)setItems:(int)itemType value:(int)value;
+-(int)numItems:(int)itemType;
+
+
 @end

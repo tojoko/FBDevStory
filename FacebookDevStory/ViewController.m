@@ -276,6 +276,7 @@ GLfloat gCubeVertexData[216] =
     rotation = 0;
     happiness = 0;
     collectAnim = 0;
+    collectedItems = -1;
     
     redCube = [self loadTex:@"red"];
     greenCube = [self loadTex:@"green"];
@@ -311,6 +312,15 @@ GLfloat gCubeVertexData[216] =
 {
 //    float aspect = fabsf(self.view.bounds.size.width / self.view.bounds.size.height);
 //    GLKMatrix4 projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(65.0f), aspect, 0.1f, 100.0f);
+
+
+
+    int it = [self.appDelegate itemType];
+    if(it != -1)
+    {
+        collectedItems = [self.appDelegate numItems:it];
+    }
+
     
     screenWidth  = self.view.frame.size.width;
     screenHeight  = self.view.frame.size.height;
@@ -342,13 +352,13 @@ GLfloat gCubeVertexData[216] =
     // _normalMatrix = GLKMatrix3InvertAndTranspose(GLKMatrix4GetMatrix3(modelViewMatrix), NULL);
     // 
     _modelViewProjectionMatrix = GLKMatrix4Multiply(projectionMatrix, modelViewMatrix);
-    
+
 //    _rotation += self.timeSinceLastUpdate * 0.5f;
     time += self.timeSinceLastUpdate;
     happiness-= self.timeSinceLastUpdate;
     collectAnim-= self.timeSinceLastUpdate;
     if(collectAnim<0) collectAnim = 0;
-    if(rotation>2*M_PI)
+    if(rotation>2*M_PI && collectedItems != -1)
     {
         
         collectedItems++;
@@ -358,6 +368,7 @@ GLfloat gCubeVertexData[216] =
             collectAnim = 1;
             happiness=1;
         }
+        [self.appDelegate setItems:[self.appDelegate itemType] value:collectedItems];
         rotation-=2*M_PI;
     }
 }
@@ -408,9 +419,10 @@ GLfloat gCubeVertexData[216] =
 
 }
 
--(GLKTextureInfo*)cubeTex
+
+-(GLKTextureInfo*)cubeTexForItem:(int)type
 {
-    switch([self.appDelegate itemType])
+    switch(type)
     {
         case 0:
         return redCube;
@@ -423,6 +435,12 @@ GLfloat gCubeVertexData[216] =
         break;
     }
     return nil;
+}
+
+
+-(GLKTextureInfo*)cubeTex
+{
+    return [self cubeTexForItem:[self.appDelegate itemType]];
 }
 
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
@@ -451,13 +469,17 @@ GLfloat gCubeVertexData[216] =
     [self drawCrank:rotation];
         
         
-    for(int i = 0; i < collectedItems; ++i)
+    for(size_t j = 0; j < 3; ++j)
     {
-        GLKTextureInfo* cube = [self cubeTex];
-        float dropy = 0;
-        if(i == collectedItems-1) dropy = screenHeight*(1.0-collectAnim)-screenHeight;
-        tex(cube, screenWidth*.1, screenHeight-i*cube.height*.7f+dropy, 1,1);
-        
+        int itemNum = [self.appDelegate numItems:j];
+        for(int i = 0; i < itemNum; ++i)
+        {
+            GLKTextureInfo* cube = [self cubeTexForItem:j];
+            float dropy = 0;
+            if(i == collectedItems-1 && j == [self.appDelegate itemType]) dropy = screenHeight*(1.0-collectAnim)-screenHeight;
+            tex(cube, screenWidth*.1+cube.width*j, screenHeight-i*cube.height*.7f+dropy, 1,1);
+
+        }
     }
 
 #if 0    
