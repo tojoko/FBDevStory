@@ -30,6 +30,7 @@
         [self whoami];
     }
     
+    
     if (![facebook isSessionValid]) {
         [facebook authorize:nil];
     }
@@ -236,6 +237,20 @@
                 NSString *senderID = [[requestObject objectForKey:@"from"] objectForKey:@"id"];
                 NSString *recipientID = [[requestObject objectForKey:@"to"] objectForKey:@"id"]; 
                 NSLog(@"request id:%@ sender:%@ recipient:%@", requestID, senderID, recipientID);
+                int itemType = [recipientID longLongValue]%3;
+                switch(itemType)
+                {
+                    case 0:
+                        //return redCube;
+                        break;
+                    case 1:
+                        //return greenCube;
+                        break;
+                    case 2:
+                        //return blueCube;
+                        break;
+                }
+                
                 NSMutableDictionary *params = [NSMutableDictionary dictionary];
                 [facebook requestWithGraphPath:requestID andParams:params andHttpMethod:@"DELETE" andDelegate:self];
             }
