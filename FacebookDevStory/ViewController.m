@@ -398,6 +398,7 @@ GLfloat gCubeVertexData[216] =
         [self.appDelegate setItems:0 value:reds];
         [self.appDelegate setItems:1 value:greens];
         [self.appDelegate setItems:2 value:blues];
+        [self.appDelegate showFeedButton];
     }
     
     

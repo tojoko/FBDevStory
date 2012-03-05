@@ -310,6 +310,10 @@
 }
 
 
+-(void)showFeedButton
+{
+    [feedDialogButton setHidden:NO];
+}
 
 
 @end
