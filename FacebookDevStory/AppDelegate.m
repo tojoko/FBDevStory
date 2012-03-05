@@ -19,6 +19,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    fbid=-1;
     facebook = [[Facebook alloc] initWithAppId:@"359344330763412" andDelegate:self];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -26,6 +27,7 @@
         && [defaults objectForKey:@"FBExpirationDateKey"]) {
         facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
         facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
+        [self whoami];
     }
     
     if (![facebook isSessionValid]) {
@@ -40,6 +42,7 @@
     } else {
         self.viewController = [[[ViewController alloc] initWithNibName:@"ViewController_iPad" bundle:nil] autorelease];
     }
+    self.viewController.appDelegate = self;
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
 
@@ -97,8 +100,14 @@
     [defaults setObject:[facebook accessToken] forKey:@"FBAccessTokenKey"];
     [defaults setObject:[facebook expirationDate] forKey:@"FBExpirationDateKey"];
     [defaults synchronize];
-    
+    [self whoami];
 }
+
+-(void)whoami
+{
+    whoamiRequest = [self.facebook requestWithGraphPath:@"/me" andDelegate:self];
+}
+
 
 - (void)fbDidNotLogin:(BOOL)cancelled {
 }
@@ -163,6 +172,7 @@
      */
 }
 
+
 // Method that gets called when the request dialog button is pressed
 - (void) requestDialogButtonClicked {
     // The action links to be shown with the post in the feed
@@ -209,6 +219,14 @@
  */
 - (void)request:(FBRequest *)request didLoad:(id)result {
     NSLog(@"received response");
+
+    if(request == whoamiRequest)
+    {
+        
+        NSString* uid = [result objectForKey:@"id"];
+        fbid = [uid longLongValue];
+        return;
+    }
     
     if (result != nil) {
         NSArray *resultData = [result objectForKey:@"data"];
@@ -238,5 +256,12 @@
 - (void) logoutButtonClicked {
     [facebook logout];
 }
+
+-(int)itemType
+{
+    return fbid%3;
+}
+
+
 
 @end

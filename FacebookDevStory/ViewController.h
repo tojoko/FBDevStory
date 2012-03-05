@@ -9,6 +9,11 @@
 #import <UIKit/UIKit.h>
 #import <GLKit/GLKit.h>
 
-@interface ViewController : GLKViewController
+@class AppDelegate;
 
+@interface ViewController : GLKViewController
+{
+    AppDelegate* appDelegate;
+}
+@property (assign) AppDelegate* appDelegate;
 @end

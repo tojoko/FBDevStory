@@ -9,15 +9,24 @@
 #import <UIKit/UIKit.h>
 #import "FBConnect.h"
 
+#include <stdint.h>
+
 @class ViewController;
 
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate, FBSessionDelegate, FBDialogDelegate, FBRequestDelegate> {
+
     Facebook *facebook;
+    id whoamiRequest;
+    int64_t fbid;
 }
 
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic, retain) Facebook *facebook;
 
 @property (strong, nonatomic) ViewController *viewController;
+
+
+-(int)itemType;
 
 @end

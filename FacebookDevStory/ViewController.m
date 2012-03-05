@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "AppDelegate.h"
 
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
 
@@ -147,10 +148,17 @@ GLfloat gCubeVertexData[216] =
     
     double time;
     double rotation;
+    double collectAnim;
+    
+    
+    float happiness;
+    
+    int collectedItems;
 
 }
 @property (strong, nonatomic) EAGLContext *context;
 @property (strong, nonatomic) GLKBaseEffect *effect;
+
 
 - (void)setupGL;
 - (void)tearDownGL;
@@ -165,6 +173,7 @@ GLfloat gCubeVertexData[216] =
 
 @synthesize context = _context;
 @synthesize effect = _effect;
+@synthesize appDelegate;
 
 - (void)dealloc
 {
@@ -265,6 +274,8 @@ GLfloat gCubeVertexData[216] =
     
     time = 0;
     rotation = 0;
+    happiness = 0;
+    collectAnim = 0;
     
     redCube = [self loadTex:@"red"];
     greenCube = [self loadTex:@"green"];
@@ -301,10 +312,6 @@ GLfloat gCubeVertexData[216] =
 //    float aspect = fabsf(self.view.bounds.size.width / self.view.bounds.size.height);
 //    GLKMatrix4 projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(65.0f), aspect, 0.1f, 100.0f);
     
-    
-    
-    
-    
     screenWidth  = self.view.frame.size.width;
     screenHeight  = self.view.frame.size.height;
     if( [UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationLandscapeLeft ||
@@ -338,6 +345,21 @@ GLfloat gCubeVertexData[216] =
     
 //    _rotation += self.timeSinceLastUpdate * 0.5f;
     time += self.timeSinceLastUpdate;
+    happiness-= self.timeSinceLastUpdate;
+    collectAnim-= self.timeSinceLastUpdate;
+    if(collectAnim<0) collectAnim = 0;
+    if(rotation>2*M_PI)
+    {
+        
+        collectedItems++;
+        if(collectedItems>3) collectedItems = 3;
+        else
+        {
+            collectAnim = 1;
+            happiness=1;
+        }
+        rotation-=2*M_PI;
+    }
 }
 
 -(void)rotateAroundX:(float)x Y:(float)y Rot:(float)rot
@@ -366,16 +388,42 @@ GLfloat gCubeVertexData[216] =
 
 -(void)drawCrank:(double)rot
 {
+    rot+=M_PI;
     float x =screenWidth*.6f;
     float y = screenHeight*.7f;
 
+
+    GLKTextureInfo* cube = [self cubeTex];
+    float pos = cube.width* (rotation/(2.0f*M_PI));
+    tex(cube, screenWidth+cube.width*.5f-pos, y, 1,1);
+
+
     [self.effect prepareToDraw];
-    tex(crank, x, y, 1, 1);
+    tex(crank, x, y, 1+sin(rot)*.1f, 1+cos(rot)*.1f);
     [self rotateAroundX:x Y:(y-handle.height*.5f) Rot:rot];
-    tex(handle, x-handle.width*.3f, y, 1, 1);
+    tex(handle, x-handle.width*.3f, y, 1,1);
     [self rotateAroundX:0 Y:0 Rot:0];
+
+
+
 }
 
+-(GLKTextureInfo*)cubeTex
+{
+    switch([self.appDelegate itemType])
+    {
+        case 0:
+        return redCube;
+        break;
+        case 1:
+        return greenCube;
+        break;
+        case 2:
+        return blueCube;
+        break;
+    }
+    return nil;
+}
 
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
 {
@@ -392,11 +440,25 @@ GLfloat gCubeVertexData[216] =
     glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
 
     
-    [self drawSadCreature];
+    if(happiness>0)
+    {
+        [self drawHappyCreature];
+    } else
+    {
+        [self drawSadCreature];
+    }
     
     [self drawCrank:rotation];
-//    [self drawHappyCreature];
         
+        
+    for(int i = 0; i < collectedItems; ++i)
+    {
+        GLKTextureInfo* cube = [self cubeTex];
+        float dropy = 0;
+        if(i == collectedItems-1) dropy = screenHeight*(1.0-collectAnim)-screenHeight;
+        tex(cube, screenWidth*.1, screenHeight-i*cube.height*.7f+dropy, 1,1);
+        
+    }
 
 #if 0    
     glDrawArrays(GL_TRIANGLES, 0, 36);
