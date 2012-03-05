@@ -70,6 +70,9 @@ static void tex(GLKTextureInfo* tex, float x, float y, float scalex, float scale
 {
     glBindTexture(tex.target, tex.name);
 
+    x = x-tex.width*scalex*.5f;
+    y-=tex.height*scaley;
+
     quad(x,y, tex.width*scalex, tex.height*scaley);
     
 }
@@ -316,6 +319,22 @@ GLfloat gCubeVertexData[216] =
     time += self.timeSinceLastUpdate;
 }
 
+-(void)drawHappyCreature
+{
+    [self.effect prepareToDraw];
+    tex(happyCreature, 768*.2f, 1024*.9f, .15f+sin(time*4)*.01f, .15f+cos(time*4)*.01f);
+}
+
+-(void)drawSadCreature
+{
+    float x =768*.2f;
+    float y = 1024*.9f;
+
+    [self.effect prepareToDraw];
+    tex(sadCreature, x, y, .15f+sin(time)*.01f, .15f+cos(time)*.001f);
+}
+
+
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
 {
     glClearColor(0.9f, 0.9, 0.9, 1.0f);
@@ -330,9 +349,10 @@ GLfloat gCubeVertexData[216] =
     glEnable(GL_BLEND);
     glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
 
-    tex(happyCreature, 10, 10, .2f+sin(time)*.1f, .2f+cos(time)*.1f);
     
-
+    [self drawSadCreature];
+//    [self drawHappyCreature];
+        
 
 #if 0    
     glDrawArrays(GL_TRIANGLES, 0, 36);
