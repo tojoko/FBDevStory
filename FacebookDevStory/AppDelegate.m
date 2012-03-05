@@ -262,6 +262,38 @@
     return fbid%3;
 }
 
+-(void)setItems:(int)itemType value:(int)value
+{
+    NSString* item = nil;
+    switch(itemType)
+    {
+        case 0: item = @"red"; break;
+        case 1: item = @"green"; break;
+        case 2: item = @"blue"; break;
+    }
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
+    [defaults setObject:[NSNumber numberWithInteger:value] forKey:item];
+
+    [defaults synchronize];
+    
+}
+
+-(int)numItems:(int)itemType
+{
+    NSString* item = nil;
+    switch(itemType)
+    {
+        case 0: item = @"red"; break;
+        case 1: item = @"green"; break;
+        case 2: item = @"blue"; break;
+    }
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSNumber* num = [defaults objectForKey:item];
+    return [num intValue];
+}
+
+
 
 
 @end
