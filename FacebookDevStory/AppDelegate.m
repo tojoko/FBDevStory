@@ -8,10 +8,14 @@
 
 #import "AppDelegate.h"
 
+#import "ViewController.h"
+
+
 @implementation AppDelegate
 
 @synthesize window = _window;
 @synthesize facebook;
+@synthesize viewController = _viewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -27,6 +31,20 @@
     if (![facebook isSessionValid]) {
         [facebook authorize:nil];
     }
+
+
+    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
+
+    // Override point for customization after application launch.
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        self.viewController = [[[ViewController alloc] initWithNibName:@"ViewController_iPhone" bundle:nil] autorelease];
+    } else {
+        self.viewController = [[[ViewController alloc] initWithNibName:@"ViewController_iPad" bundle:nil] autorelease];
+    }
+    self.window.rootViewController = self.viewController;
+    [self.window makeKeyAndVisible];
+
+
 
     // Override point for customization after application launch.
     return YES;

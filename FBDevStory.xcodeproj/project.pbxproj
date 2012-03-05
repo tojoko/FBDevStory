@@ -13,8 +13,6 @@
 		762F0551150502DD00C7319C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 762F054F150502DD00C7319C /* InfoPlist.strings */; };
 		762F0553150502DD00C7319C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 762F0552150502DD00C7319C /* main.m */; };
 		762F0557150502DD00C7319C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 762F0556150502DD00C7319C /* AppDelegate.m */; };
-		762F055A150502DD00C7319C /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 762F0558150502DD00C7319C /* MainStoryboard_iPhone.storyboard */; };
-		762F055D150502DD00C7319C /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 762F055B150502DD00C7319C /* MainStoryboard_iPad.storyboard */; };
 		762F0560150502DD00C7319C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 762F055F150502DD00C7319C /* ViewController.m */; };
 		762F0568150502DD00C7319C /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 762F0567150502DD00C7319C /* SenTestingKit.framework */; };
 		762F0569150502DD00C7319C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 762F0546150502DD00C7319C /* UIKit.framework */; };
@@ -23,6 +21,10 @@
 		762F0575150502DD00C7319C /* FacebookDevStoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 762F0574150502DD00C7319C /* FacebookDevStoryTests.m */; };
 		762F05921505042900C7319C /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 762F05851505042900C7319C /* FBDialog.bundle */; };
 		762F05931505042900C7319C /* libfacebook_ios_sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 762F058B1505042900C7319C /* libfacebook_ios_sdk.a */; };
+		BF8CE278150512F2005E5D9D /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF8CE277150512F2005E5D9D /* OpenGLES.framework */; };
+		BF8CE27A1505137C005E5D9D /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF8CE2791505137C005E5D9D /* GLKit.framework */; };
+		BF8CE27F15051462005E5D9D /* ViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF8CE27B15051462005E5D9D /* ViewController_iPad.xib */; };
+		BF8CE28015051462005E5D9D /* ViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF8CE27D15051462005E5D9D /* ViewController_iPhone.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,8 +48,6 @@
 		762F0554150502DD00C7319C /* FBDevStory-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FBDevStory-Prefix.pch"; sourceTree = "<group>"; };
 		762F0555150502DD00C7319C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		762F0556150502DD00C7319C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		762F0559150502DD00C7319C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
-		762F055C150502DD00C7319C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		762F055E150502DD00C7319C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		762F055F150502DD00C7319C /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		762F0566150502DD00C7319C /* FBDevStoryTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FBDevStoryTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -71,6 +71,11 @@
 		762F058F1505042900C7319C /* SBJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonBase.h; sourceTree = "<group>"; };
 		762F05901505042900C7319C /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
 		762F05911505042900C7319C /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
+		BF8CE274150512EE005E5D9D /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		BF8CE277150512F2005E5D9D /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		BF8CE2791505137C005E5D9D /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		BF8CE27C15051462005E5D9D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPad.xib; sourceTree = "<group>"; };
+		BF8CE27E15051462005E5D9D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPhone.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +83,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF8CE27A1505137C005E5D9D /* GLKit.framework in Frameworks */,
+				BF8CE278150512F2005E5D9D /* OpenGLES.framework in Frameworks */,
 				762F0547150502DD00C7319C /* UIKit.framework in Frameworks */,
 				762F0549150502DD00C7319C /* Foundation.framework in Frameworks */,
 				762F054B150502DD00C7319C /* CoreGraphics.framework in Frameworks */,
@@ -101,6 +108,9 @@
 		762F0537150502DD00C7319C = {
 			isa = PBXGroup;
 			children = (
+				BF8CE2791505137C005E5D9D /* GLKit.framework */,
+				BF8CE277150512F2005E5D9D /* OpenGLES.framework */,
+				BF8CE274150512EE005E5D9D /* GameKit.framework */,
 				762F05821505042900C7319C /* facebook-ios-sdk */,
 				762F054C150502DD00C7319C /* FacebookDevStory */,
 				762F056D150502DD00C7319C /* FacebookDevStoryTests */,
@@ -134,8 +144,6 @@
 			children = (
 				762F0555150502DD00C7319C /* AppDelegate.h */,
 				762F0556150502DD00C7319C /* AppDelegate.m */,
-				762F0558150502DD00C7319C /* MainStoryboard_iPhone.storyboard */,
-				762F055B150502DD00C7319C /* MainStoryboard_iPad.storyboard */,
 				762F055E150502DD00C7319C /* ViewController.h */,
 				762F055F150502DD00C7319C /* ViewController.m */,
 				762F054D150502DD00C7319C /* Supporting Files */,
@@ -146,6 +154,8 @@
 		762F054D150502DD00C7319C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BF8CE27B15051462005E5D9D /* ViewController_iPad.xib */,
+				BF8CE27D15051462005E5D9D /* ViewController_iPhone.xib */,
 				762F054E150502DD00C7319C /* FBDevStory-Info.plist */,
 				762F054F150502DD00C7319C /* InfoPlist.strings */,
 				762F0552150502DD00C7319C /* main.m */,
@@ -266,9 +276,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				762F0551150502DD00C7319C /* InfoPlist.strings in Resources */,
-				762F055A150502DD00C7319C /* MainStoryboard_iPhone.storyboard in Resources */,
-				762F055D150502DD00C7319C /* MainStoryboard_iPad.storyboard in Resources */,
 				762F05921505042900C7319C /* FBDialog.bundle in Resources */,
+				BF8CE27F15051462005E5D9D /* ViewController_iPad.xib in Resources */,
+				BF8CE28015051462005E5D9D /* ViewController_iPhone.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,28 +346,28 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		762F0558150502DD00C7319C /* MainStoryboard_iPhone.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				762F0559150502DD00C7319C /* en */,
-			);
-			name = MainStoryboard_iPhone.storyboard;
-			sourceTree = "<group>";
-		};
-		762F055B150502DD00C7319C /* MainStoryboard_iPad.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				762F055C150502DD00C7319C /* en */,
-			);
-			name = MainStoryboard_iPad.storyboard;
-			sourceTree = "<group>";
-		};
 		762F0570150502DD00C7319C /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				762F0571150502DD00C7319C /* en */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		BF8CE27B15051462005E5D9D /* ViewController_iPad.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BF8CE27C15051462005E5D9D /* en */,
+			);
+			name = ViewController_iPad.xib;
+			sourceTree = "<group>";
+		};
+		BF8CE27D15051462005E5D9D /* ViewController_iPhone.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BF8CE27E15051462005E5D9D /* en */,
+			);
+			name = ViewController_iPhone.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -368,7 +378,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -394,7 +404,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
