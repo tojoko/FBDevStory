@@ -11,6 +11,8 @@
 
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
 
+const float MAX_HAPPINESS=60;
+
 static float screenWidth, screenHeight;
 
 // Uniform index.
@@ -145,6 +147,8 @@ GLfloat gCubeVertexData[216] =
 
     GLKTextureInfo* handle;
     GLKTextureInfo* crank;
+
+    GLKTextureInfo* money;
     
     double time;
     double rotation;
@@ -152,6 +156,7 @@ GLfloat gCubeVertexData[216] =
     
     
     float happiness;
+    float moneyAnim;
     
     int collectedItems;
 
@@ -277,6 +282,7 @@ GLfloat gCubeVertexData[216] =
     happiness = 0;
     collectAnim = 0;
     collectedItems = -1;
+    moneyAnim = 0;
     
     redCube = [self loadTex:@"red"];
     greenCube = [self loadTex:@"green"];
@@ -287,6 +293,8 @@ GLfloat gCubeVertexData[216] =
 
     handle = [self loadTex:@"handle"];
     crank = [self loadTex:@"crank"];
+
+    money = [self loadTex:@"money"];
 
 }
 
@@ -312,6 +320,7 @@ GLfloat gCubeVertexData[216] =
 {
 //    float aspect = fabsf(self.view.bounds.size.width / self.view.bounds.size.height);
 //    GLKMatrix4 projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(65.0f), aspect, 0.1f, 100.0f);
+
 
 
 
@@ -357,6 +366,8 @@ GLfloat gCubeVertexData[216] =
     time += self.timeSinceLastUpdate;
     happiness-= self.timeSinceLastUpdate;
     collectAnim-= self.timeSinceLastUpdate;
+    moneyAnim-= self.timeSinceLastUpdate;
+    if(moneyAnim<0) moneyAnim = 0;
     if(collectAnim<0) collectAnim = 0;
     if(rotation>2*M_PI && collectedItems != -1)
     {
@@ -371,6 +382,27 @@ GLfloat gCubeVertexData[216] =
         [self.appDelegate setItems:[self.appDelegate itemType] value:collectedItems];
         rotation-=2*M_PI;
     }
+    
+    
+    int reds = [self.appDelegate numItems:0];
+    int greens = [self.appDelegate numItems:1];
+    int blues = [self.appDelegate numItems:2];
+
+    if(reds>=1 && greens>=1 && blues>=1)
+    {
+        happiness=MAX_HAPPINESS;
+        moneyAnim = 1;
+        reds--;
+        greens--;
+        blues--;
+        [self.appDelegate setItems:0 value:reds];
+        [self.appDelegate setItems:1 value:greens];
+        [self.appDelegate setItems:2 value:blues];
+    }
+    
+    
+    
+    
 }
 
 -(void)rotateAroundX:(float)x Y:(float)y Rot:(float)rot
@@ -457,6 +489,21 @@ GLfloat gCubeVertexData[216] =
     glEnable(GL_BLEND);
     glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
 
+    int moneycount = happiness-1;
+    if(moneycount<0) moneycount = 0;
+    float moneyy = screenHeight*(1.0f-moneyAnim)-screenHeight;
+    
+    for(size_t i = 0; i < moneycount; ++i)
+    {
+        float fun = happiness/(float)MAX_HAPPINESS;
+        
+        tex(money, screenWidth*.5f + sin(i*342)*fun*screenWidth*.12, screenHeight*.5f-(i/fun)*screenHeight*.002f+moneyy, 1,1);
+    }
+    
+    
+    
+    
+    
     
     if(happiness>0)
     {
@@ -481,6 +528,8 @@ GLfloat gCubeVertexData[216] =
 
         }
     }
+
+
 
 #if 0    
     glDrawArrays(GL_TRIANGLES, 0, 36);

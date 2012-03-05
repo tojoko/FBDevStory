@@ -21,6 +21,7 @@
 		762F0575150502DD00C7319C /* FacebookDevStoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 762F0574150502DD00C7319C /* FacebookDevStoryTests.m */; };
 		762F05921505042900C7319C /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 762F05851505042900C7319C /* FBDialog.bundle */; };
 		762F05931505042900C7319C /* libfacebook_ios_sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 762F058B1505042900C7319C /* libfacebook_ios_sdk.a */; };
+		BF075066150562A200001000 /* money.png in Resources */ = {isa = PBXBuildFile; fileRef = BF075065150562A200001000 /* money.png */; };
 		BF8CE278150512F2005E5D9D /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF8CE277150512F2005E5D9D /* OpenGLES.framework */; };
 		BF8CE27A1505137C005E5D9D /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF8CE2791505137C005E5D9D /* GLKit.framework */; };
 		BF8CE27F15051462005E5D9D /* ViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF8CE27B15051462005E5D9D /* ViewController_iPad.xib */; };
@@ -78,6 +79,7 @@
 		762F058F1505042900C7319C /* SBJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonBase.h; sourceTree = "<group>"; };
 		762F05901505042900C7319C /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
 		762F05911505042900C7319C /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
+		BF075065150562A200001000 /* money.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = money.png; path = img/money.png; sourceTree = "<group>"; };
 		BF8CE274150512EE005E5D9D /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		BF8CE277150512F2005E5D9D /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF8CE2791505137C005E5D9D /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
@@ -225,6 +227,7 @@
 			children = (
 				BFB405FD15051B09008E58D8 /* blue.png */,
 				BFB4060B15053A8D008E58D8 /* crank.png */,
+				BF075065150562A200001000 /* money.png */,
 				BFB4060C15053A8D008E58D8 /* handle.png */,
 				BFB405FE15051B09008E58D8 /* green.png */,
 				BFB405FF15051B09008E58D8 /* happy.png */,
@@ -315,6 +318,7 @@
 				BFB4060615051B09008E58D8 /* sad.png in Resources */,
 				BFB4060D15053A8D008E58D8 /* crank.png in Resources */,
 				BFB4060E15053A8D008E58D8 /* handle.png in Resources */,
+				BF075066150562A200001000 /* money.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
