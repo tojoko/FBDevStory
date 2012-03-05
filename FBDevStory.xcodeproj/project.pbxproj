@@ -25,6 +25,11 @@
 		BF8CE27A1505137C005E5D9D /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF8CE2791505137C005E5D9D /* GLKit.framework */; };
 		BF8CE27F15051462005E5D9D /* ViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF8CE27B15051462005E5D9D /* ViewController_iPad.xib */; };
 		BF8CE28015051462005E5D9D /* ViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF8CE27D15051462005E5D9D /* ViewController_iPhone.xib */; };
+		BFB4060215051B09008E58D8 /* blue.png in Resources */ = {isa = PBXBuildFile; fileRef = BFB405FD15051B09008E58D8 /* blue.png */; };
+		BFB4060315051B09008E58D8 /* green.png in Resources */ = {isa = PBXBuildFile; fileRef = BFB405FE15051B09008E58D8 /* green.png */; };
+		BFB4060415051B09008E58D8 /* happy.png in Resources */ = {isa = PBXBuildFile; fileRef = BFB405FF15051B09008E58D8 /* happy.png */; };
+		BFB4060515051B09008E58D8 /* red.png in Resources */ = {isa = PBXBuildFile; fileRef = BFB4060015051B09008E58D8 /* red.png */; };
+		BFB4060615051B09008E58D8 /* sad.png in Resources */ = {isa = PBXBuildFile; fileRef = BFB4060115051B09008E58D8 /* sad.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +81,11 @@
 		BF8CE2791505137C005E5D9D /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		BF8CE27C15051462005E5D9D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPad.xib; sourceTree = "<group>"; };
 		BF8CE27E15051462005E5D9D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPhone.xib; sourceTree = "<group>"; };
+		BFB405FD15051B09008E58D8 /* blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blue.png; path = img/blue.png; sourceTree = "<group>"; };
+		BFB405FE15051B09008E58D8 /* green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = green.png; path = img/green.png; sourceTree = "<group>"; };
+		BFB405FF15051B09008E58D8 /* happy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = happy.png; path = img/happy.png; sourceTree = "<group>"; };
+		BFB4060015051B09008E58D8 /* red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = red.png; path = img/red.png; sourceTree = "<group>"; };
+		BFB4060115051B09008E58D8 /* sad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sad.png; path = img/sad.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +118,7 @@
 		762F0537150502DD00C7319C = {
 			isa = PBXGroup;
 			children = (
+				BFB405FB15051AEB008E58D8 /* img */,
 				BF8CE2791505137C005E5D9D /* GLKit.framework */,
 				BF8CE277150512F2005E5D9D /* OpenGLES.framework */,
 				BF8CE274150512EE005E5D9D /* GameKit.framework */,
@@ -205,6 +216,18 @@
 			path = "facebook-ios-sdk";
 			sourceTree = "<group>";
 		};
+		BFB405FB15051AEB008E58D8 /* img */ = {
+			isa = PBXGroup;
+			children = (
+				BFB405FD15051B09008E58D8 /* blue.png */,
+				BFB405FE15051B09008E58D8 /* green.png */,
+				BFB405FF15051B09008E58D8 /* happy.png */,
+				BFB4060015051B09008E58D8 /* red.png */,
+				BFB4060115051B09008E58D8 /* sad.png */,
+			);
+			name = img;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -279,6 +302,11 @@
 				762F05921505042900C7319C /* FBDialog.bundle in Resources */,
 				BF8CE27F15051462005E5D9D /* ViewController_iPad.xib in Resources */,
 				BF8CE28015051462005E5D9D /* ViewController_iPhone.xib in Resources */,
+				BFB4060215051B09008E58D8 /* blue.png in Resources */,
+				BFB4060315051B09008E58D8 /* green.png in Resources */,
+				BFB4060415051B09008E58D8 /* happy.png in Resources */,
+				BFB4060515051B09008E58D8 /* red.png in Resources */,
+				BFB4060615051B09008E58D8 /* sad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
